@@ -47,19 +47,58 @@ with open(input_filepath) as electionfile:
             vote_tallies[row[2]] = vote_tallies[row[2]] + 1
             found_count = found_count + 1
 
-print ("Election results")
-print ("------------------------")
-print ("Total votes: ", total_votes)    
-print ("------------------------")
-for name in vote_tallies:
-    if vote_tallies[name] > winning_tally:
-        winning_tally = vote_tallies[name]
-        winner = name
-    pct_total = (vote_tallies[name] / total_votes) * 100
-    display_tally = '{:,.0f}'.format(vote_tallies[name])
-    display_pct = '{:,.1f}'.format(pct_total)
-    print (name, ": ", display_pct, "% (", display_tally, ")")
-print ("------------------------")
-print ("Winner: ",winner)
-print ("------------------------")
+
+# write results to output file
+with open(output_filepath, 'w', newline='') as analysisfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(analysisfile)
+
+    # write results to terminal and to output file
+    line = "Election results"
+    csvwriter.writerow([line])
+    print (line)
+
+    line = "------------------------"
+    csvwriter.writerow([line])
+    print (line)
+
+    display_total = '{:,.0f}'.format(total_votes)
+    line = "Total votes: " + display_total 
+    csvwriter.writerow([line])
+    print (line)
+
+    line = "------------------------"
+    csvwriter.writerow([line])
+    print (line)
+
+    # calc percent total for all candidates and identify winner
+    for name in vote_tallies:
+        if vote_tallies[name] > winning_tally:
+            # current candidate has most votes
+            winning_tally = vote_tallies[name]
+            winner = name
+
+        # calc percent of total votes for current candidate
+        pct_total = (vote_tallies[name] / total_votes) * 100
+        display_tally = '{:,.0f}'.format(vote_tallies[name])
+        display_pct = '{:,.1f}'.format(pct_total)
+
+        # write results for current candidate
+        line = name + ": " + display_pct + "% (" + display_tally + ")"
+        csvwriter.writerow([line])
+        print (line)
+
+    # write winner
+    line = ("------------------------")
+    csvwriter.writerow([line])
+    print (line)
+
+    line = "Winner: " + winner
+    csvwriter.writerow([line])
+    print (line)
+
+    line = ("------------------------")
+    csvwriter.writerow([line])
+    print (line)
 
