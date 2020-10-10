@@ -1,9 +1,10 @@
-# uom_stp_python-challenge   
-
+# uom_stp_python-challenge 
 ### University of Minnesota Data Analytics and Visualization Bootcamp
 ### Start date: 9/14/2020
 ### Week 3:  Intro to Python 
 ### Home work due: 10/10/2020
+
+Not included on due date but will be added at a later date:  2 extra content scripts - PyBoss and PyParagraph
 
 ## Background
 
